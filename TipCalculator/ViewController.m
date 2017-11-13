@@ -72,5 +72,8 @@
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     self.tipAmountLabel.text = [NSString stringWithFormat:@"The tip amount is: %@", [numberFormatter stringFromNumber:result]];
 }
+- (IBAction)billAmountChanged:(id)sender {
+    [self calculateTip];
+}
 
 @end
