@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *billAmountTextField;
 @property (weak, nonatomic) IBOutlet UILabel *tipAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sliderLabel;
@@ -23,7 +23,6 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     self.billAmountTextField.delegate = self;
     [self.billAmountTextField becomeFirstResponder];
     
@@ -64,16 +63,6 @@
     [self calculateTip];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.billAmountTextField resignFirstResponder];
-    return YES;
-}
-
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    [self calculateTip];
-}
-
 - (void) calculateTip {
     NSDecimalNumber *billAmount = [NSDecimalNumber decimalNumberWithString:self.billAmountTextField.text];
     [self convertPercentage];
@@ -83,7 +72,5 @@
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     self.tipAmountLabel.text = [NSString stringWithFormat:@"The tip amount is: %@", [numberFormatter stringFromNumber:result]];
 }
-
-
 
 @end
